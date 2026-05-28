@@ -43,7 +43,21 @@
     ``` bash
         python manage.py startapp blog
         python manage.py startapp contact
-        python manage.py startapp interview                                                     
+        python python manage.py startapp interview apps/interview     
+        # This will create app in folder                                             
+    ```
+
+## Python run migrations
+
+    ``` bash
+        python manage.py makemigrations
+        python manage.py migrate
+    ```
+
+    to run miration for single app
+
+    ``` bash
+        python manage.py makemigrations appname
     ```
 
 ## Python start server
