@@ -1,9 +1,7 @@
-from django.shortcuts import render
-
 from apps.angular.models import Angular
 from apps.angular.serializers import AngularSerializer
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 
 
@@ -11,40 +9,38 @@ from rest_framework.response import Response
 class AngularViewSet(viewsets.ModelViewSet):
     queryset = Angular.objects.all()
     serializer_class = AngularSerializer
- 
-    
+
+    # Custom action: publish
+    @action(detail=True, methods=["post"])
+    def publish(self, request, pk=None):
+        angular = self.get_object()
+        angular.content_status = "approved"
+        angular.save()
+        return Response(
+            {"message": f"Angular {pk} published successfully"},
+            status=status.HTTP_200_OK,
+        )
+
+    # Custom action: archive
+    @action(detail=True, methods=["post"])
+    def archive(self, request, pk=None):
+        angular = self.get_object()
+        angular.content_status = "archived"
+        angular.save()
+        return Response(
+            {"message": f"Angular {pk} archived successfully"},
+            status=status.HTTP_200_OK,
+        )
+
+
 @api_view(["POST"])
 def update_angular(request):
     try:
         data = request.data
         serial_number = data.get("serial_number")
-        category = data.get("category")
-        topic = data.get("topic")
-        content_status = data.get("content_status")
-        visible = data.get("visible", True)
-        question = data.get("question")
-        answer = data.get("answer")
-        answer2 = data.get("answer2")
-        image_url = data.get("image_url")
-        image2_url = data.get("image2_url")
-        image3_url = data.get("image3_url")
-        angular_questions = data.get("angular_questions")
-
         angular, created = Angular.objects.update_or_create(
             serial_number=serial_number,
-            defaults={
-                "category": category,
-                "topic": topic,
-                "content_status": content_status,
-                "visible": visible,
-                "question": question,
-                "answer": answer,
-                "answer2": answer2,
-                "image_url": image_url,
-                "image2_url": image2_url,
-                "image3_url": image3_url,
-                "angular_questions": angular_questions,
-            },
+            defaults=data,
         )
 
         if created:
