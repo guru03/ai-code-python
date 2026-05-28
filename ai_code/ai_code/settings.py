@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     # 'debug_toolbar',
-    'angular',
-    'interview',
+    'apps.angular',
+    'apps.interview',
     
 ]
 

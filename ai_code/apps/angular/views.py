@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from angular.models import Angular
-from angular.serializers import AngularSerializer
+from apps.angular.models import Angular
+from apps.angular.serializers import AngularSerializer
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
