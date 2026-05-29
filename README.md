@@ -24,11 +24,16 @@
         pip install django-cors-headers
     ```
 
-## 2. Generate the requirements file
+## 2. Generate the requirements file after any dependency install
 
     ``` bash
         pip freeze > requirements.txt
     ``` 
+
+## 3. Update your project 
+    ``` bash
+        pip install -r requirements.txt
+    ```
 
 ##  4. Create Project
 
