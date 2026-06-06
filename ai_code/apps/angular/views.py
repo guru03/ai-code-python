@@ -32,7 +32,7 @@ class AngularViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=["post"])
     def publish(self, request, pk=None):
         angular = self.get_object()
-        angular.content_status = "approved"
+        angular.content_status = WorkStatus.Approved.value
         angular.save()
         return Response(
             {"message": f"Angular {pk} published successfully"},
@@ -43,7 +43,7 @@ class AngularViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=["post"])
     def archive(self, request, pk=None):
         angular = self.get_object()
-        angular.content_status = "archived"
+        angular.content_status = WorkStatus.Archived.value
         angular.save()
         return Response(
             {"message": f"Angular {pk} archived successfully"},
