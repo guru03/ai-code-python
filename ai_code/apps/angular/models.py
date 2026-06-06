@@ -2,7 +2,7 @@ from django.utils import timezone
 
 from django.db import models
 
-from common_models.status_choices import STATUS_CHOICES
+from common_models.status_choices import STATUS, STATUS_CHOICES
 
 
 class Angular(models.Model):
@@ -11,6 +11,14 @@ class Angular(models.Model):
     serial_number = models.CharField(max_length=100, default="01", unique=True)
     category = models.CharField(max_length=100)
     topic = models.CharField(max_length=100, default="general")
+    
+    # Add content_status with choices
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS,
+        default="draft"
+    )
+    
     content_status = models.CharField(choices=STATUS_CHOICES, default="pending")
     visible = models.BooleanField(default=True)
     question = models.TextField(blank=True, null=True)

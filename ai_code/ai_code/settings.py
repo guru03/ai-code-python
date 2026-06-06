@@ -56,6 +56,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+APPEND_SLASH = False
+
 ROOT_URLCONF = 'ai_code.urls'
 
 CORS_ALLOWED_ORIGINS = [

@@ -1,14 +1,32 @@
-from apps.angular.models import Angular
-from apps.angular.serializers import AngularSerializer
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
+from apps.angular.models import Angular
+from apps.angular.serializers import AngularSerializer
 
 
-# Create your views here.
 class AngularViewSet(viewsets.ModelViewSet):
     queryset = Angular.objects.all()
     serializer_class = AngularSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = [
+        "serial_number",
+        "created_at",
+        "updated_at",
+    ]  # specify fields you want to allow ordering
+    ordering = ["serial_number"]  # default ordering
+
+    @action(detail=False, methods=["get"])
+    def ascending(self, request):
+        queryset = Angular.objects.all().order_by("serial_number")
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=["get"])
+    def descending(self, request):
+        queryset = Angular.objects.all().order_by("-serial_number")
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
     # Custom action: publish
     @action(detail=True, methods=["post"])
