@@ -29,6 +29,7 @@ class Angular(models.Model):
     question = models.TextField(blank=True, null=True)
     answer = models.TextField(blank=True, null=True)
     answer2 = models.TextField(blank=True, null=True)
+    code_block = models.TextField(blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
     image2_url = models.URLField(blank=True, null=True)
     image3_url = models.URLField(blank=True, null=True)
