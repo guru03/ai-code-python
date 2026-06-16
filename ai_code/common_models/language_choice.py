@@ -1,5 +1,5 @@
 LANGUAGE_CHOICES = [
-    ("all", "All"),
+    # ("all", "All"),
     ("angular", "Angular"),
     ("javascript", "JavaScript"),
     ("ngrx", "NgRx"),
@@ -7,4 +7,5 @@ LANGUAGE_CHOICES = [
     ("signals", "Signals"),
     ("hr", "HR"),
     ("ai", "Artificial Intelligence"),
+    ("question_design", "Question Design"),
 ]
