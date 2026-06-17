@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.angular',
     'apps.javascript',
     'apps.interview',
+    'apps.locations',
     
 ]
 

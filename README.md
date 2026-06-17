@@ -104,6 +104,14 @@
         }
     ```
 
+## to load data from the json file
+
+    ``` bash
+        
+        python manage.py loaddata initial_data.json
+
+    ```
+
 ## Frontend (Angular)
 
 ## 1. Setup Angular Project

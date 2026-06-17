@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class InterviewConfig(AppConfig):
-    name = 'interview'
+class LocationsConfig(AppConfig):
+    name = "apps.locations"

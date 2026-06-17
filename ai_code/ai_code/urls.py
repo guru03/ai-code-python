@@ -20,11 +20,14 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from apps.angular.views import AngularViewSet
 from apps.javascript.views import JavascriptViewSet
+from apps.locations.views import CityViewSet, StateViewSet
 
 
 router = DefaultRouter()
 router.register(r"angular", AngularViewSet, basename="angular")
 router.register(r"javascript", JavascriptViewSet, basename="javascript")
+router.register(r"states", StateViewSet, basename="states")   # 👈 new
+router.register(r"cities", CityViewSet, basename="cities")    # 👈 new
 
 urlpatterns = [
     path("admin/", admin.site.urls),
