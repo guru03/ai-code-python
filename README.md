@@ -2,11 +2,12 @@
 
 ## How I have started this project step by step
 
-* created Git Repo with the name AI_Wen _Arrow
+* created Git Repo with the name AI_Web_Arrow
 
-# Backend (Django + PostgreSQL)
+## Backend (Django + PostgreSQL)
 
-##  1. Virtual Environment and activate it:
+### 1. Virtual Environment and activate it
+
     Create Virtual environment and activate it
 
     ``` bash
@@ -14,7 +15,8 @@
         .venv\Scripts\activate
     ```
 
-##  3. Install Dependencies
+## 3. Install Dependencies
+
     Install Dependencies
 
     ``` bash
@@ -30,12 +32,13 @@
         pip freeze > requirements.txt
     ``` 
 
-## 3. Update your project 
+## 3. Update your project
+
     ``` bash
         pip install -r requirements.txt
     ```
 
-##  4. Create Project
+## 4. Create Project
 
     ``` bash
         django-admin startproject ai_code
@@ -45,10 +48,11 @@
     ```
 
 ## 5. Create Apps
+
     ``` bash
         python manage.py startapp blog
         python manage.py startapp contact
-        python python manage.py startapp interview apps/interview     
+        python manage.py startapp interview apps/interview     
         # This will create app in folder                                             
     ```
 
@@ -66,15 +70,17 @@
     ```
 
 ## Python start server
+
     python manage.py migrate
 
     ``` bash
         python manage.py runserver
     ```
 
-# PostgreSQL Configuration
+## PostgreSQL Configuration
 
 ## 1.Create Database
+
     In PostgreSQL:
 
     ``` sql
@@ -82,6 +88,7 @@
     ```
 
 ## 2. Configure PostgreSQL
+
     Update settings.py
 
     ``` python
@@ -97,8 +104,10 @@
         }
     ```
 
-# Frontend (Angular)
-##  1. Setup Angular Project
+## Frontend (Angular)
+
+## 1. Setup Angular Project
+
     ``` typescript
         ng new AI_Frontend
     ```
