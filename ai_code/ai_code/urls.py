@@ -17,9 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from rest_framework.routers import DefaultRouter
+from apps.angular.views import AngularViewSet
+from apps.javascript.views import JavascriptViewSet
+
+
+router = DefaultRouter()
+router.register(r"angular", AngularViewSet, basename="angular")
+router.register(r"javascript", JavascriptViewSet, basename="javascript")
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path('api/', include('apps.angular.urls')),
-    # path('api/', include('apps.interview.urls')),
+    path("api/", include(router.urls)),
 ]

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # 'debug_toolbar',
     'apps.angular',
+    'apps.javascript',
     'apps.interview',
     
 ]
