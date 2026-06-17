@@ -3,9 +3,38 @@ from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from apps.angular.models import Angular
 from apps.angular.serializers import AngularSerializer
+from django.db.models import IntegerField
+from django.db.models.functions import Cast
 
 
 class AngularViewSet(viewsets.ModelViewSet):
+    
+    #* This is just for the backup
+    # queryset = Angular.objects.all()
+    # serializer_class = AngularSerializer
+    # filter_backends = [filters.OrderingFilter]
+    # ordering_fields = ["serial_number", "created_at", "updated_at"]
+    # ordering = ["serial_number"]
+
+    # @action(detail=False, methods=["get"])
+    # def ascending(self, request):
+    #     queryset = Angular.objects.annotate(
+    #         serial_number_int=Cast("serial_number", IntegerField())
+    #     ).order_by("serial_number_int")
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
+
+    # @action(detail=False, methods=["get"])
+    # def descending(self, request):
+    #     queryset = Angular.objects.annotate(
+    #         serial_number_int=Cast("serial_number", IntegerField())
+    #     ).order_by("-serial_number_int")
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
+    
+    
+    
+    
     queryset = Angular.objects.all()
     serializer_class = AngularSerializer
     filter_backends = [filters.OrderingFilter]

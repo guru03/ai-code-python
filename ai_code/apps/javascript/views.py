@@ -1,32 +1,33 @@
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
+from natsort import natsorted
 
 from apps.javascript.serializers import JavascriptSerializer
 from apps.javascript.models import Javascript
+from common_enum.status import WorkStatus
+from common_utils.sorting import natural_sort
 
 
 class JavascriptViewSet(viewsets.ModelViewSet):
     queryset = Javascript.objects.all()
     serializer_class = JavascriptSerializer
     filter_backends = [filters.OrderingFilter]
-    ordering_fields = [
-        "serial_number",
-        "created_at",
-        "updated_at",
-    ]  # specify fields you want to allow ordering
-    ordering = ["serial_number"]  # default ordering
+    ordering_fields = ["serial_number", "created_at", "updated_at"]
+    ordering = ["serial_number"]
 
     @action(detail=False, methods=["get"])
     def ascending(self, request):
-        queryset = Javascript.objects.all().order_by("serial_number")
-        serializer = self.get_serializer(queryset, many=True)
+        queryset_sorted = natural_sort(Javascript.objects.all(), field="serial_number")
+        serializer = self.get_serializer(queryset_sorted, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=["get"])
     def descending(self, request):
-        queryset = Javascript.objects.all().order_by("-serial_number")
-        serializer = self.get_serializer(queryset, many=True)
+        queryset_sorted = natural_sort(
+            Javascript.objects.all(), field="serial_number", reverse=True
+        )
+        serializer = self.get_serializer(queryset_sorted, many=True)
         return Response(serializer.data)
 
     # Custom action: publish
@@ -69,7 +70,8 @@ def update_javascript(request):
             )
         else:
             return Response(
-                {"message": "Javascript updated successfully"}, status=status.HTTP_200_OK
+                {"message": "Javascript updated successfully"},
+                status=status.HTTP_200_OK,
             )
 
     except Exception as e:
