@@ -10,52 +10,52 @@ from django.db.models.functions import Cast
 class AngularViewSet(viewsets.ModelViewSet):
     
     #* This is just for the backup
-    # queryset = Angular.objects.all()
-    # serializer_class = AngularSerializer
-    # filter_backends = [filters.OrderingFilter]
-    # ordering_fields = ["serial_number", "created_at", "updated_at"]
-    # ordering = ["serial_number"]
-
-    # @action(detail=False, methods=["get"])
-    # def ascending(self, request):
-    #     queryset = Angular.objects.annotate(
-    #         serial_number_int=Cast("serial_number", IntegerField())
-    #     ).order_by("serial_number_int")
-    #     serializer = self.get_serializer(queryset, many=True)
-    #     return Response(serializer.data)
-
-    # @action(detail=False, methods=["get"])
-    # def descending(self, request):
-    #     queryset = Angular.objects.annotate(
-    #         serial_number_int=Cast("serial_number", IntegerField())
-    #     ).order_by("-serial_number_int")
-    #     serializer = self.get_serializer(queryset, many=True)
-    #     return Response(serializer.data)
-    
-    
-    
-    
     queryset = Angular.objects.all()
     serializer_class = AngularSerializer
     filter_backends = [filters.OrderingFilter]
-    ordering_fields = [
-        "serial_number",
-        "created_at",
-        "updated_at",
-    ]  # specify fields you want to allow ordering
-    ordering = ["serial_number"]  # default ordering
+    ordering_fields = ["serial_number", "created_at", "updated_at"]
+    ordering = ["serial_number"]
 
     @action(detail=False, methods=["get"])
     def ascending(self, request):
-        queryset = Angular.objects.all().order_by("serial_number")
+        queryset = Angular.objects.annotate(
+            serial_number_int=Cast("serial_number", IntegerField())
+        ).order_by("serial_number_int")
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=["get"])
     def descending(self, request):
-        queryset = Angular.objects.all().order_by("-serial_number")
+        queryset = Angular.objects.annotate(
+            serial_number_int=Cast("serial_number", IntegerField())
+        ).order_by("-serial_number_int")
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+    
+    
+    
+    
+    # queryset = Angular.objects.all()
+    # serializer_class = AngularSerializer
+    # filter_backends = [filters.OrderingFilter]
+    # ordering_fields = [
+    #     "serial_number",
+    #     "created_at",
+    #     "updated_at",
+    # ]  # specify fields you want to allow ordering
+    # ordering = ["serial_number"]  # default ordering
+
+    # @action(detail=False, methods=["get"])
+    # def ascending(self, request):
+    #     queryset = Angular.objects.all().order_by("serial_number")
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
+
+    # @action(detail=False, methods=["get"])
+    # def descending(self, request):
+    #     queryset = Angular.objects.all().order_by("-serial_number")
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
 
     # Custom action: publish
     @action(detail=True, methods=["post"])

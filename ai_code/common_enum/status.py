@@ -21,7 +21,7 @@ class WorkStatusInProgress(Enum):
     Archived = "archived"
     Completed = "completed"
     InProgress = "in progress"
-
+    
 
 #! Not in use, but can be used for future reference
 STATUS_CHOICES = [

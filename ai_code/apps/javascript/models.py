@@ -2,6 +2,7 @@ from django.utils import timezone
 
 from django.db import models
 
+from common_models.code_language_choices import CODE_LANGUAGE_CHOICES
 from common_models.label_choice import LABEL_CHOICES
 from common_models.language_choice import LANGUAGE_CHOICES
 from common_enum.status import WorkStatus
@@ -44,9 +45,31 @@ class Javascript(models.Model):
     question = models.TextField(blank=True, null=True)
     answer = models.TextField(blank=True, null=True)
     answer2 = models.TextField(blank=True, null=True)
+    
+    code_language = models.CharField(
+        max_length=50,
+        choices=CODE_LANGUAGE_CHOICES,
+        default="typescript"
+    )
+    code_block_title = models.TextField(blank=True, null=True)
     code_block = models.TextField(blank=True, null=True)
+    
+    code_language2 = models.CharField(
+        max_length=50,
+        choices=CODE_LANGUAGE_CHOICES,
+        default="typescript"
+    )
+    code_block_title2 = models.TextField(blank=True, null=True)
     code_block2 = models.TextField(blank=True, null=True)
+    
+    code_language3 =models.CharField(
+        max_length=50,
+        choices=CODE_LANGUAGE_CHOICES,
+        default="typescript"
+    )
+    code_block_title3 = models.TextField(blank=True, null=True)
     code_block3 = models.TextField(blank=True, null=True)
+    
     answer3 = models.TextField(blank=True, null=True)
     answer4 = models.TextField(blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
