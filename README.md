@@ -104,11 +104,31 @@
         }
     ```
 
-## to load data from the json file
+## Load initial Data from the json file
+
+### We need to convert JSON file into fixtures
+
+Created a script to convert json file in to fixture, run below command to run this script.
+
+    ``` bash
+
+        python data/convert_fixture.py
+        
+    ```
+
+### to load data from the json file
 
     ``` bash
         
         python manage.py loaddata initial_data.json
+
+    ```
+
+    or with the file path
+
+    ``` bash
+        
+        python manage.py loaddata apps/javascript/fixtures/javascript_initial_data.json
 
     ```
 
