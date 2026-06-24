@@ -1,10 +1,10 @@
 from rest_framework import viewsets, status, filters
-from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
-from apps.angular.models import Angular
-from apps.angular.serializers import AngularSerializer
+from rest_framework.decorators import action, api_view
 from django.db.models import IntegerField
 from django.db.models.functions import Cast
+from apps.angular.models import Angular
+from apps.angular.serializers import AngularSerializer
 
 
 class AngularViewSet(viewsets.ModelViewSet):

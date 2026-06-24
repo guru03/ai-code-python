@@ -1,9 +1,10 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import AngularViewSet
+
+from views import CodingViewSet
 
 router = DefaultRouter()
-router.register(r"angular", AngularViewSet, basename="angular")
+router.register(r"coding", CodingViewSet, basename="coding")
 
 
 urlpatterns = [
