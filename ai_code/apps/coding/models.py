@@ -31,7 +31,7 @@ class Coding(models.Model):
         default=WorkStatus.Draft.value,
     )
 
-    programe = models.TextField(blank=True, null=True)  # maps to Angular `programe`
+    question = models.TextField(blank=True, null=True)  # maps to Angular `programe`
     solution = models.TextField(blank=True, null=True)   # maps to Angular `soution`
     alternate_solution = models.TextField(blank=True, null=True)  # optional
 
@@ -40,7 +40,7 @@ class Coding(models.Model):
         choices=CODE_LANGUAGE_CHOICES,
         default="typescript"
     )
-    code_block_title = models.CharField(max_length=100, blank=True, null=True)
+    code_title = models.CharField(max_length=100, blank=True, null=True)
     code_editor = models.TextField(blank=True, null=True)  # maps to Angular `code_editor`
 
     created_at = models.DateTimeField(auto_now_add=True)
