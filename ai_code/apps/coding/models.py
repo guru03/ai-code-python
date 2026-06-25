@@ -7,12 +7,12 @@ from common_models.code_language_choices import CODE_LANGUAGE_CHOICES
 
 class Coding(models.Model):
     id = models.AutoField(primary_key=True)
-    serial_number = models.IntegerField(unique=True)  # Angular expects number, not string
+    serial_number = models.CharField(max_length=100, unique=True)
 
     language = models.CharField(
         max_length=50,
         choices=LANGUAGE_CHOICES,
-        default="angular"
+        default="javascript"
     )
 
     difficulty = models.CharField(
@@ -21,7 +21,7 @@ class Coding(models.Model):
         default="beginner"
     )
 
-    topic = models.CharField(max_length=100, default="angular")
+    topic = models.CharField(max_length=100, default="array method")
 
     visible = models.BooleanField(default=True)
 
@@ -31,8 +31,8 @@ class Coding(models.Model):
         default=WorkStatus.Draft.value,
     )
 
-    question = models.TextField(blank=True, null=True)  # maps to Angular `programe`
-    solution = models.TextField(blank=True, null=True)   # maps to Angular `soution`
+    question = models.TextField(blank=True, null=True)  
+    solution = models.TextField(blank=True, null=True)  
     alternate_solution = models.TextField(blank=True, null=True)  # optional
 
     code_language = models.CharField(
@@ -41,7 +41,9 @@ class Coding(models.Model):
         default="typescript"
     )
     code_title = models.CharField(max_length=100, blank=True, null=True)
-    code_editor = models.TextField(blank=True, null=True)  # maps to Angular `code_editor`
+    code_editor = models.TextField(blank=True, null=True)  
+    code_output = models.TextField(blank=True, null=True)
+    code_explanation = models.TextField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
