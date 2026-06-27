@@ -4,7 +4,7 @@ from django.db import models
 
 from common_enum.status import WorkStatus
 from common_models.language_choice import LANGUAGE_CHOICES
-from common_models.label_choice import LABEL_CHOICES
+from common_models.label_choice import LABEL_CHOICES, TOPICS_CHOICES
 from common_models.code_language_choices import CODE_LANGUAGE_CHOICES
 # from common_models.status_choices import STATUS, STATUS_CHOICES
 
@@ -27,7 +27,13 @@ class Angular(models.Model):
         default="beginner"
     )
 
-    topic = models.CharField(max_length=100, default="angular")
+    # topic = models.CharField(max_length=100, default="angular")
+    
+    topic = models.CharField(
+        max_length=50,
+        choices=TOPICS_CHOICES,
+        default="routing"
+    )
 
     # Add content_status with choices
     # status = models.CharField(

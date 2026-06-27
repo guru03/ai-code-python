@@ -4,8 +4,8 @@ from rest_framework.decorators import action, api_view
 from django.db.models import IntegerField
 from django.db.models.functions import Cast
 
-from .models import Coding
-from .serializers import CodingSerializer
+from .models import Coding, CodingExample
+from .serializers import CodingSerializer, CodingExampleSerializer
 
 
 class CodingViewSet(viewsets.ModelViewSet):
@@ -32,7 +32,6 @@ class CodingViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-
     # Custom action: publish
     @action(detail=True, methods=["post"])
     def publish(self, request, pk=None):
@@ -56,12 +55,20 @@ class CodingViewSet(viewsets.ModelViewSet):
         )
 
 
+class CodingExampleViewSet(viewsets.ModelViewSet):
+    queryset = CodingExample.objects.all()
+    serializer_class = CodingExampleSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ["created_at", "code_language", "code_title"]
+    ordering = ["created_at"]
+
+
 @api_view(["POST"])
 def update_coding(request):
     try:
         data = request.data
         serial_number = data.get("serial_number")
-        Coding, created = Coding.objects.update_or_create(
+        coding, created = Coding.objects.update_or_create(
             serial_number=serial_number,
             defaults=data,
         )

@@ -12,7 +12,31 @@ LABEL_CHOICES = [
 
 #! this is not in use, I will use this angular topic latter
 
-TOPIC_CHOICES = [
+
+TOPICS_CHOICES = [
+    ("angular_fundamentals", "Angular Fundamentals"),
+    ("components_templates", "Components & Templates"),
+    ("directives_pipes", "Directives & Pipes"),
+    ("dependency_injection", "Dependency Injection & Services"),
+    ("component_lifecycle", "Component Lifecycle"),
+    ("routing", "Routing"),
+    ("forms", "Forms"),
+    ("http", "HTTP & APIs"),
+    ("rxjs", "RxJS"),
+    ("signals", "Signals"),
+    ("state_management", "State Management"),
+    ("angular_material", "Angular Material"),
+    ("advanced_angular", "Advanced Angular"),
+    ("ssr_hydration", "SSR & Hydration"),
+    ("testing", "Testing"),
+    ("performance", "Performance"),
+    ("security", "Security"),
+    ("build_deployment", "Build & Deployment"),
+    ("angular_ecosystem", "Angular Ecosystem"),
+    ("expert_angular", "Expert Angular"),
+]
+
+TOPIC_CHOICES1 = [
     ("components", "Components"),
     ("modules", "Modules"),
     ("templates", "Templates"),

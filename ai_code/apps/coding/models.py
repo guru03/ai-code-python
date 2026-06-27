@@ -10,19 +10,14 @@ class Coding(models.Model):
     serial_number = models.CharField(max_length=100, unique=True)
 
     language = models.CharField(
-        max_length=50,
-        choices=LANGUAGE_CHOICES,
-        default="javascript"
+        max_length=50, choices=LANGUAGE_CHOICES, default="javascript"
     )
 
     difficulty = models.CharField(
-        max_length=20,
-        choices=LABEL_CHOICES,
-        default="beginner"
+        max_length=20, choices=LABEL_CHOICES, default="beginner"
     )
 
     topic = models.CharField(max_length=100, default="array method")
-
     visible = models.BooleanField(default=True)
 
     content_status = models.CharField(
@@ -31,25 +26,48 @@ class Coding(models.Model):
         default=WorkStatus.Draft.value,
     )
 
-    question = models.TextField(blank=True, null=True)  
-    solution = models.TextField(blank=True, null=True)  
-    alternate_solution = models.TextField(blank=True, null=True)  # optional
+    question = models.TextField(blank=True, null=True)
+    solution = models.TextField(blank=True, null=True)
+    alternate_solution = models.TextField(blank=True, null=True)
 
+    # Primary code snippet (optional, examples handled separately)
     code_language = models.CharField(
-        max_length=50,
-        choices=CODE_LANGUAGE_CHOICES,
-        default="typescript"
+        max_length=50, choices=CODE_LANGUAGE_CHOICES, default="typescript"
     )
-    code_title = models.CharField(max_length=100, blank=True, null=True)
-    code_editor = models.TextField(blank=True, null=True)  
+    code_title = models.TextField(blank=True, null=True)
+    code_editor = models.TextField(blank=True, null=True)
     code_output = models.TextField(blank=True, null=True)
     code_explanation = models.TextField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"{self.language} - {self.topic}"
-
     class Meta:
         db_table = "apps_coding"
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.serial_number} - {self.topic}"
+
+
+class CodingExample(models.Model):
+    coding = models.ForeignKey(
+        Coding, on_delete=models.CASCADE, related_name="code_examples"
+    )
+
+    code_language = models.CharField(
+        max_length=50, choices=CODE_LANGUAGE_CHOICES, default="typescript"
+    )
+    code_title = models.TextField(blank=True, null=True)
+    code_editor = models.TextField()
+    code_output = models.TextField(blank=True, null=True)
+    code_explanation = models.TextField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "apps_coding_example"
+        ordering = ["created_at"]
+
+    def __str__(self):
+        return f"{self.code_title} ({self.code_language})"
