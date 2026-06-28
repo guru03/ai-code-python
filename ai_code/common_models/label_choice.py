@@ -8,32 +8,30 @@ LABEL_CHOICES = [
 ]
 
 
-
-
 #! this is not in use, I will use this angular topic latter
 
 
 TOPICS_CHOICES = [
-    ("angular_fundamentals", "Angular Fundamentals"),
-    ("components_templates", "Components & Templates"),
-    ("directives_pipes", "Directives & Pipes"),
-    ("dependency_injection", "Dependency Injection & Services"),
-    ("component_lifecycle", "Component Lifecycle"),
-    ("routing", "Routing"),
-    ("forms", "Forms"),
-    ("http", "HTTP & APIs"),
-    ("rxjs", "RxJS"),
-    ("signals", "Signals"),
-    ("state_management", "State Management"),
-    ("angular_material", "Angular Material"),
-    ("advanced_angular", "Advanced Angular"),
-    ("ssr_hydration", "SSR & Hydration"),
-    ("testing", "Testing"),
-    ("performance", "Performance"),
-    ("security", "Security"),
-    ("build_deployment", "Build & Deployment"),
-    ("angular_ecosystem", "Angular Ecosystem"),
-    ("expert_angular", "Expert Angular"),
+    ("Angular Fundamentals", "angular_fundamentals"),
+    ("Components & Templates", "components_templates"),
+    ("Directives & Pipes", "directives_pipes"),
+    ("Dependency Injection & Services", "dependency_injection"),
+    ("Component Lifecycle", "component_lifecycle"),
+    ("Routing", "routing"),
+    ("Forms", "forms"),
+    ("HTTP & APIs", "http"),
+    ("RxJS", "rxjs"),
+    ("Signals", "signals"),
+    ("State Management", "state_management"),
+    ("Angular Material", "angular_material"),
+    ("Advanced Angular", "advanced_angular"),
+    ("SSR & Hydration", "ssr_hydration"),
+    ("Testing", "testing"),
+    ("Performance", "performance"),
+    ("Security", "security"),
+    ("Build & Deployment", "build_deployment"),
+    ("Angular Ecosystem", "angular_ecosystem"),
+    ("Expert Angular", "expert_angular"),
 ]
 
 TOPIC_CHOICES1 = [

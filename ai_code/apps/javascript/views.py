@@ -10,6 +10,7 @@ from common_utils.sorting import natural_sort
 
 
 class JavascriptViewSet(viewsets.ModelViewSet):
+    
     queryset = Javascript.objects.all()
     serializer_class = JavascriptSerializer
     filter_backends = [filters.OrderingFilter]
