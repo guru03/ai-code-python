@@ -1,8 +1,7 @@
 from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
-from django.db.models import IntegerField
-from django.db.models.functions import Cast
+from django.db.models import Count
 from apps.angular.models import Angular
 from apps.angular.serializers import AngularSerializer
 from common_utils.sorting import natural_sort
@@ -15,8 +14,7 @@ class AngularViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ["serial_number", "created_at", "updated_at"]
     ordering = ["serial_number"]
-    
-    
+
     @action(detail=False, methods=["get"])
     def ascending(self, request):
         queryset_sorted = natural_sort(Angular.objects.all(), field="serial_number")
@@ -30,7 +28,22 @@ class AngularViewSet(viewsets.ModelViewSet):
         )
         serializer = self.get_serializer(queryset_sorted, many=True)
         return Response(serializer.data)
-    
+
+    # New action: count by topic
+    @action(detail=False, methods=["get"])
+    def count_by_topic(self, request):
+        topic = request.query_params.get("topic")  # e.g. ?topic=rxjs
+        if not topic:
+            return Response({"error": "Topic parameter is required"}, status=400)
+
+        count = Angular.objects.filter(topic=topic).count()
+        return Response({"topic": topic, "count": count})
+
+    # New action: summary of all topics
+    @action(detail=False, methods=["get"])
+    def topics_summary(self, request):
+        summary = Angular.objects.values("topic").annotate(total=Count("id"))
+        return Response(summary)
 
     # Custom action: publish
     @action(detail=True, methods=["post"])

@@ -4,6 +4,8 @@ from rest_framework.decorators import action, api_view
 from django.db.models import IntegerField
 from django.db.models.functions import Cast
 
+from common_utils.sorting import natural_sort
+
 from .models import Coding, CodingExample
 from .serializers import CodingSerializer, CodingExampleSerializer
 
@@ -18,19 +20,33 @@ class CodingViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["get"])
     def ascending(self, request):
-        queryset = Coding.objects.annotate(
-            serial_number_int=Cast("serial_number", IntegerField())
-        ).order_by("serial_number_int")
-        serializer = self.get_serializer(queryset, many=True)
+        queryset_sorted = natural_sort(Coding.objects.all(), field="serial_number")
+        serializer = self.get_serializer(queryset_sorted, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=["get"])
     def descending(self, request):
-        queryset = Coding.objects.annotate(
-            serial_number_int=Cast("serial_number", IntegerField())
-        ).order_by("-serial_number_int")
-        serializer = self.get_serializer(queryset, many=True)
+        queryset_sorted = natural_sort(
+            Coding.objects.all(), field="serial_number", reverse=True
+        )
+        serializer = self.get_serializer(queryset_sorted, many=True)
         return Response(serializer.data)
+
+    # @action(detail=False, methods=["get"])
+    # def ascending(self, request):
+    #     queryset = Coding.objects.annotate(
+    #         serial_number_int=Cast("serial_number", IntegerField())
+    #     ).order_by("serial_number_int")
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
+
+    # @action(detail=False, methods=["get"])
+    # def descending(self, request):
+    #     queryset = Coding.objects.annotate(
+    #         serial_number_int=Cast("serial_number", IntegerField())
+    #     ).order_by("-serial_number_int")
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
 
     # Custom action: publish
     @action(detail=True, methods=["post"])

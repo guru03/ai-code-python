@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.db import models
 
 from common_models.code_language_choices import CODE_LANGUAGE_CHOICES
-from common_models.label_choice import LABEL_CHOICES
+from common_models.label_choice import JAVASCRIPT_TOPICS_CHOICES, LABEL_CHOICES
 from common_models.language_choice import LANGUAGE_CHOICES
 from common_enum.status import WorkStatus
 # from common_models.status_choices import STATUS, STATUS_CHOICES
@@ -27,20 +27,19 @@ class Javascript(models.Model):
         default="beginner"
     )
 
-    topic = models.CharField(max_length=100, default="javascript")
+    topic = models.CharField(
+        max_length=50,
+        choices=JAVASCRIPT_TOPICS_CHOICES,
+        default="routing"
+    )
 
-    # Add content_status with choices
-    # status = models.CharField(
-    #     max_length=20,
-    #     choices=STATUS,
-    #     default="draft"
-    # )
 
     content_status = models.CharField(
         max_length=50,
         choices=[(status.value, status.name) for status in WorkStatus],
         default=WorkStatus.Draft.value,
     )
+    
     visible = models.BooleanField(default=True)
     question = models.TextField(blank=True, null=True)
     answer = models.TextField(blank=True, null=True)
@@ -51,30 +50,30 @@ class Javascript(models.Model):
         choices=CODE_LANGUAGE_CHOICES,
         default="typescript"
     )
-    code_block_title = models.TextField(blank=True, null=True)
-    code_block = models.TextField(blank=True, null=True)
+    code_title = models.TextField(blank=True, null=True)
+    code_editor = models.TextField(blank=True, null=True)
     
     code_language2 = models.CharField(
         max_length=50,
         choices=CODE_LANGUAGE_CHOICES,
         default="typescript"
     )
-    code_block_title2 = models.TextField(blank=True, null=True)
-    code_block2 = models.TextField(blank=True, null=True)
+    code_title2 = models.TextField(blank=True, null=True)
+    code_editor2 = models.TextField(blank=True, null=True)
     
     code_language3 =models.CharField(
         max_length=50,
         choices=CODE_LANGUAGE_CHOICES,
         default="typescript"
     )
-    code_block_title3 = models.TextField(blank=True, null=True)
-    code_block3 = models.TextField(blank=True, null=True)
+    code_title3 = models.TextField(blank=True, null=True)
+    code_editor3 = models.TextField(blank=True, null=True)
     
     answer3 = models.TextField(blank=True, null=True)
     answer4 = models.TextField(blank=True, null=True)
-    image_url = models.URLField(blank=True, null=True)
-    image2_url = models.URLField(blank=True, null=True)
-    image3_url = models.URLField(blank=True, null=True)
+    # image_url = models.URLField(blank=True, null=True)
+    # image2_url = models.URLField(blank=True, null=True)
+    # image3_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     javascript_questions = models.JSONField(null=True, blank=True)
